@@ -1,0 +1,1 @@
+export const CONTENTTYPE_JSON = 'application/json'

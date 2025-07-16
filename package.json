@@ -1,0 +1,63 @@
+{
+  "name": "http-utils",
+  "version": "1.0.0-beta.1",
+  "description": "HTTP utilities for headers, content types, and common HTTP operations",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KnowmaxNL/http-utils.git"
+  },
+  "keywords": [
+    "knowmax",
+    "http",
+    "utils",
+    "headers",
+    "content-types",
+    "typescript",
+    "web",
+    "api",
+    "fetch"
+  ],
+  "author": "Knowmax BV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KnowmaxNL/http-utils/issues"
+  },
+  "homepage": "https://github.com/KnowmaxNL/http-utils#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.4",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
