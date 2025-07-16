@@ -1,6 +1,6 @@
 {
   "name": "@knowmax/http-utils",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "HTTP utilities for headers, content types, and common HTTP operations",
   "main": "dist/index.js",
   "module": "dist/index.js",

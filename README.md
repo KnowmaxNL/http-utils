@@ -1,26 +1,24 @@
 # HTTP Utils
 
-A TypeScript library providing utilities for HTTP operations including headers, content types, status codes, and HTTP methods.
+A TypeScript library providing utilities for HTTP operations including headers and content types.
 
 ## Installation
 
 ```bash
-npm install http-utils
+npm install @knowmax/http-utils
 ```
 
 ## Features
 
 - 🔧 **Headers Builder**: Fluent API for building HTTP headers
 - 📝 **Content Types**: Constants for common MIME types
-- 🚦 **Status Codes**: HTTP status code constants and helper functions
-- 🌐 **HTTP Methods**: HTTP method constants and utilities
 
 ## Usage
 
 ### Headers Builder
 
 ```typescript
-import { headers } from 'http-utils'
+import { headers } from '@knowmax/http-utils'
 
 // Basic usage
 const basicHeaders = headers()
@@ -30,84 +28,20 @@ const basicHeaders = headers()
 
 // Advanced usage
 const advancedHeaders = headers({ 'X-Custom': 'value' })
-  .withBasicAuth('username', 'password')
+  .withBearer('token123')
   .withLanguage('en-US')
-  .withUserAgent('MyApp/1.0')
-  .withNoCacheControl()
+  .withContentType('text/plain')
+  .withHeader('X-API-Key', 'secret')
   .export()
-
-// For fetch API
-const fetchHeaders = headers()
-  .withBearer('token')
-  .toFetchHeaders()
-
-fetch('/api/data', {
-  headers: fetchHeaders
-})
 ```
 
 ### Content Types
 
 ```typescript
-import { 
-  CONTENTTYPE_JSON, 
-  CONTENTTYPE_XML, 
-  CONTENTTYPE_FORM_URLENCODED,
-  CONTENTTYPE_IMAGE_PNG 
-} from 'http-utils'
+import { CONTENTTYPE_JSON } from '@knowmax/http-utils'
 
 // Use in your requests
 headers().withContentType(CONTENTTYPE_JSON)
-headers().withAccept(CONTENTTYPE_XML)
-```
-
-### Status Codes
-
-```typescript
-import { 
-  STATUS_OK, 
-  STATUS_NOT_FOUND, 
-  STATUS_INTERNAL_SERVER_ERROR,
-  isSuccess,
-  isError 
-} from 'http-utils'
-
-// Check response status
-if (response.status === STATUS_OK) {
-  // Handle success
-}
-
-// Use helper functions
-if (isSuccess(response.status)) {
-  // Handle any success status (2xx)
-}
-
-if (isError(response.status)) {
-  // Handle any error status (4xx or 5xx)
-}
-```
-
-### HTTP Methods
-
-```typescript
-import { 
-  HTTP_GET, 
-  HTTP_POST, 
-  isIdempotent, 
-  allowsBody 
-} from 'http-utils'
-
-// Use in requests
-fetch('/api/data', { method: HTTP_POST })
-
-// Check method properties
-if (isIdempotent(method)) {
-  // Safe to retry
-}
-
-if (allowsBody(method)) {
-  // Can include request body
-}
 ```
 
 ## API Reference
@@ -117,40 +51,17 @@ if (allowsBody(method)) {
 | Method | Description |
 |--------|-------------|
 | `withBearer(token)` | Add Bearer authorization |
-| `withBasicAuth(username, password)` | Add Basic authorization |
-| `withApiKey(key, headerName?)` | Add API key (default: X-API-Key) |
+| `withLanguage(language)` | Set Accept-Language (optional parameter) |
 | `withContentTypeJson()` | Set Content-Type to application/json |
-| `withContentTypeForm()` | Set Content-Type to application/x-www-form-urlencoded |
-| `withAcceptJson()` | Set Accept to application/json |
-| `withLanguage(language)` | Set Accept-Language |
-| `withUserAgent(userAgent)` | Set User-Agent |
-| `withNoCacheControl()` | Set no-cache headers |
-| `withHeader(key, value)` | Add custom header |
-| `withHeaders(headers)` | Add multiple headers |
-| `removeHeader(key)` | Remove header |
-| `hasHeader(key)` | Check if header exists |
-| `getHeader(key)` | Get header value |
-| `export()` | Get plain object |
-| `toFetchHeaders()` | Get fetch-compatible Headers |
+| `withContentType(contentType)` | Set custom Content-Type |
+| `withHeader(key, value)` | Add custom header (ignores empty values) |
+| `export()` | Get plain object with all headers |
 
-### Status Code Helpers
+### Content Types
 
-| Function | Description |
-|----------|-------------|
-| `isInformational(status)` | Check if status is 1xx |
-| `isSuccess(status)` | Check if status is 2xx |
-| `isRedirection(status)` | Check if status is 3xx |
-| `isClientError(status)` | Check if status is 4xx |
-| `isServerError(status)` | Check if status is 5xx |
-| `isError(status)` | Check if status is 4xx or 5xx |
-
-### HTTP Method Helpers
-
-| Function | Description |
-|----------|-------------|
-| `isIdempotent(method)` | Check if method is idempotent |
-| `isSafe(method)` | Check if method is safe |
-| `allowsBody(method)` | Check if method allows request body |
+| Constant | Value |
+|----------|-------|
+| `CONTENTTYPE_JSON` | `'application/json'` |
 
 ## Requirements
 
